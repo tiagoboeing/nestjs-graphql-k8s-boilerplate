@@ -1,7 +1,7 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CACHE_MANAGER } from '@nestjs/cache-manager';
 import { ConfigService } from '@nestjs/config';
-import { Cache, Store } from 'cache-manager';
+import { Cache, ErrorEventHandler, Store } from 'cache-manager';
 import environments from '../../@core/environments';
 import { name as appName } from '../../../package.json';
 
@@ -17,6 +17,10 @@ export class RedisCacheService implements Cache<Store> {
   ) {
     this.cachePrefix = this.config.get(environments.redis.prefix) || appName;
   }
+
+  removeListener: <T>(event: 'error', handler: ErrorEventHandler<T>) => void;
+
+  on: <T>(event: 'error', handler: ErrorEventHandler<T>) => void;
 
   private getKeyWithPrefix(key: string) {
     return `${this.cachePrefix}:cache:${key}`;
