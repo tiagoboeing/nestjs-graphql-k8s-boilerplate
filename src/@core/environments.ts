@@ -9,6 +9,7 @@ export default {
     username: 'REDIS_USERNAME',
     password: 'REDIS_PASSWORD',
     prefix: 'REDIS_PREFIX',
+    tls: 'REDIS_TLS',
   },
   pubsub: {
     timeout: 'PUBSUB_TIMEOUT',
